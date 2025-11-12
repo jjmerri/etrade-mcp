@@ -194,8 +194,13 @@ def etrade_get_option_expire_dates(symbol: str, expiry_type: Optional[str] = Non
 
 
 def main():
-    """Run the MCP server"""
-    mcp.run()
+    """Run the MCP server via HTTP"""
+    import uvicorn
+    from fastmcp.server.http import create_streamable_http_app
+    
+    app = create_streamable_http_app(mcp, streamable_http_path="/mcp")
+    
+    uvicorn.run(app, host="0.0.0.0", port=8000)
 
 
 if __name__ == "__main__":

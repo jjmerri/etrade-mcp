@@ -75,6 +75,8 @@ You can also authenticate through the MCP tools:
 
 ### Running the Server
 
+The server runs as an HTTP server on port 8000 with the MCP endpoint at `/mcp`:
+
 ```bash
 etrade-mcp
 ```
@@ -83,6 +85,22 @@ Or with Python:
 
 ```bash
 python -m etrade_mcp.server
+```
+
+The server will start at `http://localhost:8000` with the MCP endpoint available at `http://localhost:8000/mcp`.
+
+### Connecting to the Server
+
+Configure your MCP client to connect to the HTTP endpoint:
+
+```json
+{
+  "mcpServers": {
+    "etrade": {
+      "url": "http://localhost:8000/mcp"
+    }
+  }
+}
 ```
 
 ### Available Tools

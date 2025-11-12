@@ -1,0 +1,18 @@
+[project]
+name = "etrade-mcp"
+version = "0.1.0"
+description = "E*TRADE MCP Server for Market API"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=0.1.0",
+    "rauth>=0.7.3",
+    "requests>=2.31.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+etrade-mcp = "etrade_mcp.server:main"

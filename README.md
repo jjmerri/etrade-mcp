@@ -2,6 +2,10 @@
 
 A Model Context Protocol (MCP) server for E*TRADE's Market API, built with FastMCP.
 
+<a href="https://glama.ai/mcp/servers/@jjmerri/etrade-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@jjmerri/etrade-mcp/badge" alt="E*TRADE Server MCP server" />
+</a>
+
 ## Features
 
 This MCP server provides access to E*TRADE's Market API endpoints:

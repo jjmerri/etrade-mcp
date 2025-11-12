@@ -41,9 +41,26 @@ def get_market_client() -> MarketClient:
     """Get market client (requires authentication)"""
     global _market_client
     if _market_client is None:
-        raise ValueError(
-            "Not authenticated. Please call etrade_authenticate first."
-        )
+        # Try to load access token from environment
+        access_token = os.getenv("ETRADE_ACCESS_TOKEN")
+        access_token_secret = os.getenv("ETRADE_ACCESS_TOKEN_SECRET")
+        
+        if access_token and access_token_secret:
+            # Create session from stored tokens
+            auth = get_auth()
+            from rauth import OAuth1Session
+            session = OAuth1Session(
+                auth.consumer_key,
+                auth.consumer_secret,
+                access_token=access_token,
+                access_token_secret=access_token_secret
+            )
+            _market_client = MarketClient(session, auth.base_url)
+        else:
+            raise ValueError(
+                "Not authenticated. Please run authenticate.py to get access tokens, "
+                "or use etrade_get_auth_url and etrade_authenticate tools."
+            )
     return _market_client
 
 

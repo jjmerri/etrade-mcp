@@ -20,12 +20,13 @@ class ETradeAuth:
         self.consumer_secret = consumer_secret
         self.environment = environment
         
-        # Determine base URL
+        # Determine base URL (API endpoints differ, but OAuth endpoints are the same)
         if environment == "production":
             self.base_url = os.getenv("ETRADE_PROD_BASE_URL", "https://api.etrade.com")
         else:
             self.base_url = os.getenv("ETRADE_SANDBOX_BASE_URL", "https://apisb.etrade.com")
         
+        # OAuth endpoints are always on api.etrade.com (not apisb) even for sandbox
         # Initialize OAuth service
         self.oauth_service = OAuth1Service(
             name="etrade",
@@ -34,7 +35,7 @@ class ETradeAuth:
             request_token_url="https://api.etrade.com/oauth/request_token",
             access_token_url="https://api.etrade.com/oauth/access_token",
             authorize_url="https://us.etrade.com/e/t/etws/authorize?key={}&token={}",
-            base_url="https://api.etrade.com"
+            base_url=self.base_url
         )
         
         self.session = None
